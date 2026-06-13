@@ -1,0 +1,23 @@
+services:
+  server:
+    build: ./server
+    container_name: avalon-server
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./server:/app
+    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+    restart: unless-stopped
+
+  # Uncomment once the React client exists in ./client with a Dockerfile.
+  # client:
+  #   build: ./client
+  #   container_name: avalon-client
+  #   ports:
+  #     - "5173:5173"
+  #   volumes:
+  #     - ./client:/app
+  #     - /app/node_modules
+  #   depends_on:
+  #     - server
+  #   restart: unless-stopped
